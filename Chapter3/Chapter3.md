@@ -62,11 +62,11 @@
 2. 从非私有方法中返回引用。
 3. 将一个对象传递给外部方法，相当于发布这个对象了。
 4. 发布一个内部类实例。内引类实例包装了对封装类实例的隐含引用。
-       class UnsafeStates{
-    		private String[] states = new String[]{"AK", "AL"};
-    		public String[] getStates(){
+		class UnsafeStates{
+    			private String[] states = new String[]{"AK", "AL"};
+    			public String[] getStates(){
     			return states;
-            }
+            	}
  		}
         私有变量发布，逸出。
         public class SafeListener{
