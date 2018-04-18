@@ -54,3 +54,40 @@
 	- 在访问变量时不需要**加锁**
 --------------------------------
 ## 发布与溢出
+**发布**一个对象是指对象能够在当前作用域之外的区域的代码中使用。
+当某个不应当发布的对象被发布时，这种情况称之为**逸出**。
+发布对象最简单的方法是将对象的引用保存到一个公有的**静态变量**之中。
+- 发布对象的方式：
+1. 将对象的引用存储到公共静态域中。
+2. 从非私有方法中返回引用。
+3. 将一个对象传递给外部方法，相当于发布这个对象了。
+4. 发布一个内部类实例。内引类实例包装了对封装类实例的隐含引用。
+       class UnsafeStates{
+    		private String[] states = new String[]{"AK", "AL"};
+    		public String[] getStates(){
+    			return states;
+            }
+ 		}
+        私有变量发布，逸出。
+        public class SafeListener{
+      	private final EventListener listener;
+      	private safeListener(){
+          listener = new EventListener(){
+              public void onEvent(Event e){
+                  doSomething(e);
+              	}
+          	}
+     	}
+            public static SafeListener newInstance(EventSource source){
+             SafeListener safeListener = new SafeListener();
+             safeListener.registerListener(safeListener.listener);
+
+             return safeListener;
+     		}
+	 	}
+        构造方法结束后再发布
+---------------------------------------
+## 线程封闭
+线程封闭即是在**单线程**内访问数据。当某个对象被封闭在一个线程中时，这种用法将自动实现线程安全，即使线程封闭的对象是不安全的。
+- **Ad-hoc线程封闭**
+这是完全靠实现者控制的线程封闭，他的线程封闭完全靠实现者实现。Ad-hoc线程封闭非常脆弱，没有任何一种语言特性能将对象封闭到目标线程上。
