@@ -2,9 +2,9 @@
 ## 可见性
 可见性是指在读操作和写操作不同的线程中执行时，读取的值与写入的值不一致。通常，我们无法确保执行读操作的线程能适时看到**其他线程**写操作的值。为了确保多个线程之间对内存写入操作的可见性，必须使用**同步**机制。
 - **失效数据**：除非每次在访问变量时都加同步，否则则可能获取到的变量是一个失效值。失效值不一定会**同时出现**，有可能某变量为最新值，某变量为失效值。
-		public class InvalidThread
-		{
-    		private int num;
+		`public class InvalidThread`
+		`{`
+    		`private int num;`
 
             public int getNum()
             {
@@ -62,14 +62,14 @@
 2. 从非私有方法中返回引用。
 3. 将一个对象传递给外部方法，相当于发布这个对象了。
 4. 发布一个内部类实例。内引类实例包装了对封装类实例的隐含引用。
-       class UnsafeStates{
-    		private String[] states = new String[]{"AK", "AL"};
+       `class UnsafeStates{`
+    		`private String[] states = new String[]{"AK", "AL"};
     		public String[] getStates(){
     			return states;
             }
  		}
-        私有变量发布，逸出。
-        public class SafeListener{
+        私有变量发布，逸出。`
+        `public class SafeListener{
       	private final EventListener listener;
       	private safeListener(){
           listener = new EventListener(){
@@ -80,7 +80,7 @@
      	}
             public static SafeListener newInstance(EventSource source){
              SafeListener safeListener = new SafeListener();
-             safeListener.registerListener(safeListener.listener);
+             safeListener.registerListener(safeListener.listener);`
 
              return safeListener;
      		}
