@@ -15,7 +15,7 @@
             public void setNum()
             {
         		this.num++;
-                System.out.println("this num = "+num++ + " Thread  name="+Thread.currentThread().getName());
+                System.out.println("this num = "+num + " Thread  name="+Thread.currentThread().getName());
     		}
 
             public static void main(String[] args)
